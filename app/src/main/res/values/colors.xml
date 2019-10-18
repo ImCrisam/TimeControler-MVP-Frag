@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#764157</color>
+    <color name="colorPrimaryDark">#764157</color>
+    <color name="colorAccent">#764157</color>
+    <color name="colorComplementary">#417661</color>
+    <color name="colorANALOGOUS">#764171</color>
+    <color name="colorANALOGOUS2">#764741</color>
+    <color name="colorTRIADIC">#766141</color>
+    <color name="colorTRIADIC2">#577641</color>
+    <color name="colorNegro">#232020</color>
+</resources>

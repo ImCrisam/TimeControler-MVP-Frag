@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityReloj"
+    android:background="@color/colorNegro">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relativeLy1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp">
+
+
+            <ImageButton
+                android:id="@+id/btnTiempo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/botongrande"
+                android:src="@drawable/relojarena" />
+
+            <ImageButton
+                android:id="@+id/btnResultados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/assignment"
+                android:background="@drawable/botongrande"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLy2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="1">
+
+            <FrameLayout
+                android:id="@+id/frameLy2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/linerLy1">
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linerLy1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/frameLy1"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1">
+
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageButton
+                android:id="@+id/btnGrande"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@drawable/botongrande"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:paddingHorizontal="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnPlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/play"
+                    android:background="@drawable/botones"
+                    android:layout_marginHorizontal="5dp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/btnReplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/replay"
+                    android:background="@drawable/botones"
+                    android:layout_marginHorizontal="5dp"/>
+
+                <ImageButton
+                    android:id="@+id/btnStop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/stop"
+                    android:background="@drawable/botones"
+                    android:layout_marginHorizontal="5dp"
+                    />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
