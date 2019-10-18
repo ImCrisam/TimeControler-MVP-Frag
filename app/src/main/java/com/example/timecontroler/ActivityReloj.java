@@ -2,10 +2,8 @@ package com.example.timecontroler;
 
 import androidx.fragment.app.FragmentActivity;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
@@ -18,6 +16,7 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
     private ImageButton btn1, btn2, btn3, btnBig;
     private FrameLayout frameLy1, frameLy2;
     private boolean isplay = true;
+    private boolean isbegin = true;
     private int intBtnGrande;
 
     @Override
@@ -93,19 +92,26 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                 return true;
             }
         });
+
         frameLy1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (isbegin) {
+                    acciones(3);
+                }
                 presenter.cambio();
-
             }
         });
         frameLy2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (isbegin) {
+                    acciones(3);
+                }
                 presenter.cambio();
             }
         });
+
     }
 
     @Override
@@ -150,6 +156,7 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
         btn3.setVisibility(View.VISIBLE);
     }
     private void acciones(int i) {
+        isbegin = false;
         switch (i) {
             case 1:
                 if (isplay) {
