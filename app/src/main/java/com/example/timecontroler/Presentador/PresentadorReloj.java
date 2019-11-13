@@ -68,11 +68,11 @@ public class PresentadorReloj implements FragmentNavigation.Presenter, ActivityR
     public void replay() {
         int i, k;
         if (posicion) {
-            i=1;
-            k=2;
-        }else {
             i=2;
             k=1;
+        }else {
+            i=1;
+            k=2;
         }
         reset(i);
         frag = (Frag) view.getFragmeny(k);

@@ -2,6 +2,7 @@ package com.example.timecontroler;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -13,25 +14,45 @@ import com.example.timecontroler.Presentador.PresentadorReloj;
 public class ActivityReloj extends FragmentActivity implements com.example.timecontroler.Navi.ActivityReloj.View {
 
     private PresentadorReloj presenter;
-    private ImageButton btn1, btn2, btn3, btnBig;
+    private ImageButton btn1, btn2, btn3, btnResult, btnRelojA;
     private FrameLayout frameLy1, frameLy2;
     private boolean isplay = true;
     private boolean isbegin = true;
-    private int intBtnGrande;
+    private int intBtnGrande=1;
+    private Intent  intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        intent = new Intent();
         presenter = new PresentadorReloj(this);
+
         btn1 = findViewById(R.id.btnPlay);
         btn2 = findViewById(R.id.btnReplay);
         btn3 = findViewById(R.id.btnStop);
-        btnBig = findViewById(R.id.btnGrande);
+
+        btnResult = findViewById(R.id.btnResultados);
+        btnRelojA = findViewById(R.id.btnTiempo);
+
         frameLy1 = findViewById(R.id.frameLy1);
         frameLy2 = findViewById(R.id.frameLy2);
+
         presenter.getPrimerFragment();
 
+        //----- botones superiores-----//
+        btnResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(ActivityReloj.this, Resultados.class );
+                startActivity(intent);
+
+            }
+        });
+
+
+
+//----- botones play------///
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,67 +71,52 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                 acciones(2);
             }
         });
-        btnBig.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(intBtnGrande==1){
-                    if (isplay) {
-                        btnBig.setImageDrawable(getDrawable(R.drawable.pause));
-                    } else {
-                        btnBig.setImageDrawable(getDrawable(R.drawable.play));
-                    }
-                }
-                acciones(intBtnGrande);
-            }
-        });
+
         btn1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                onClikLongBtn(btn1, 1);
+                intBtnGrande = 1;
                 return true;
             }
         });
         btn2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                onClikLongBtn(btn2, 2);
+                intBtnGrande = 2;
                 return true;
             }
         });
         btn3.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                onClikLongBtn(btn3, 3);
-                return true;
-            }
-        });
-        btnBig.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                btnBig.setVisibility(View.GONE);
-                btnVisible();
+                intBtnGrande = 3;
                 return true;
             }
         });
 
-        frameLy1.setOnClickListener(new View.OnClickListener() {
+//----------- acciones fragmentos----//
+        View.OnLongClickListener onLongClick = new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View v) {
                 if (isbegin) {
                     acciones(3);
                 }
                 presenter.cambio();
+                return true;
             }
-        });
-        frameLy2.setOnClickListener(new View.OnClickListener() {
+        };
+        frameLy1.setOnLongClickListener(onLongClick);
+        frameLy2.setOnLongClickListener(onLongClick);
+
+
+        View.OnClickListener onClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isbegin) {
-                    acciones(3);
-                }
-                presenter.cambio();
+                acciones(intBtnGrande);
             }
-        });
+        };
+        frameLy1.setOnClickListener(onClick);
+        frameLy2.setOnClickListener(onClick);
 
     }
 
@@ -142,19 +148,8 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                 return null;
         }
     }
-    private void onClikLongBtn(ImageButton boton, int i) {
-        btnVisible();
-        boton.setVisibility(View.GONE);
-        intBtnGrande = i;
-        boton.getDrawable();
-        btnBig.setVisibility(View.VISIBLE);
-        btnBig.setImageDrawable(boton.getDrawable());
-    }
-    private void btnVisible() {
-        btn1.setVisibility(View.VISIBLE);
-        btn2.setVisibility(View.VISIBLE);
-        btn3.setVisibility(View.VISIBLE);
-    }
+
+
     private void acciones(int i) {
         isbegin = false;
         switch (i) {

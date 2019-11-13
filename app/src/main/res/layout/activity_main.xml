@@ -85,20 +85,7 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
 
-            <ImageButton
-                android:id="@+id/btnGrande"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:background="@drawable/botongrande"
-                android:visibility="gone"
-                />
-
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
