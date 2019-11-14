@@ -113,4 +113,9 @@ public class Cronometro extends Frag {
         chronometer.setBase(l);
     }
 
+    @Override
+    public CharSequence getTime() {
+        return chronometer.getText();
+    }
+
 }

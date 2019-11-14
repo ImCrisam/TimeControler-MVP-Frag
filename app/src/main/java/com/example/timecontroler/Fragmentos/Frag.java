@@ -40,6 +40,7 @@ public abstract class Frag extends Fragment implements FragmentNavigation.View {
     public abstract void setBasepausa(long l);
     public abstract long getBasepausa();
     public abstract void setbase(long l);
+    public abstract CharSequence getTime();
 
 
 

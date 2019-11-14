@@ -59,6 +59,11 @@ private TextClock txtClock;
 
     }
 
+    @Override
+    public CharSequence getTime() {
+        return null;
+    }
+
 
     @Override
     public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
