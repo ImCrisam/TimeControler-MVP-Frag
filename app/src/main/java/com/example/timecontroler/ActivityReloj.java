@@ -9,23 +9,29 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.example.timecontroler.Fragmentos.Frag;
+import com.example.timecontroler.Navi.InterfaceGuardar;
+import com.example.timecontroler.Presentador.PresentadorGuardar;
 import com.example.timecontroler.Presentador.PresentadorReloj;
 
-public class ActivityReloj extends FragmentActivity implements com.example.timecontroler.Navi.ActivityReloj.View {
+public class ActivityReloj extends FragmentActivity implements com.example.timecontroler.Navi.ActivityReloj.View, InterfaceGuardar.View {
 
     private PresentadorReloj presenter;
     private ImageButton btn1, btn2, btn3, btnResult, btnRelojA;
     private FrameLayout frameLy1, frameLy2;
     private boolean isplay = true;
     private boolean isbegin = true;
-    private int intBtnGrande=1;
-    private Intent  intent;
+    private int intFragReset = 2;
+    private int intFragTotal = 1;
+    private int intBtnGrande = 1;
+    private Intent intent;
+    private PresentadorGuardar guardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         intent = new Intent();
+        guardar = new PresentadorGuardar(this);
         presenter = new PresentadorReloj(this);
 
         btn1 = findViewById(R.id.btnPlay);
@@ -44,12 +50,11 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
         btnResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(ActivityReloj.this, Resultados.class );
+                intent.setClass(ActivityReloj.this, Resultados.class);
                 startActivity(intent);
 
             }
         });
-
 
 
 //----- botones play------///
@@ -102,6 +107,13 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                     acciones(3);
                 }
                 presenter.cambio();
+                if (intFragReset == 1) {
+                    intFragTotal = 1;
+                    intFragReset = 2;
+                } else {
+                    intFragTotal = 2;
+                    intFragReset = 1;
+                }
                 return true;
             }
         };
@@ -128,6 +140,7 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                 .replace(R.id.frameLy1, fragment1)
                 .commit();
     }
+
     @Override
     public void setFragment2(Frag fragment2) {
         fragment2.atachPresenter(presenter);
@@ -164,9 +177,12 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                 isplay = !isplay;
                 break;
             case 2:
+                guardar.obtener(intFragReset);
                 presenter.replay();
                 break;
             case 3:
+                guardar.obtener(intFragReset);
+                guardar.obtener(intFragTotal);
                 presenter.reset(1);
                 presenter.reset(2);
                 presenter.start_Stop(1);
