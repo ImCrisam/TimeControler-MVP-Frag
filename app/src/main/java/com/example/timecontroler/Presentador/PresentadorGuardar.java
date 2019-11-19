@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
 
 public class PresentadorGuardar implements InterfaceGuardar.Presentador {
 
@@ -31,8 +32,10 @@ public class PresentadorGuardar implements InterfaceGuardar.Presentador {
     @Override
     public void guardar(int total) {
         tempo = view.getFragmeny(total).getTime();
-        registro.setTotal(tempo.toString());
-        datos.agregar(registro);
+        if (!tempo.toString().equals("00:00")) {
+            registro.setTotal(tempo.toString());
+            datos.agregar(registro);
+        }
     }
 
     @Override
@@ -43,7 +46,6 @@ public class PresentadorGuardar implements InterfaceGuardar.Presentador {
 
     @Override
     public void agregar(int i) {
-        tempo = view.getFragmeny(i).getTime();
         if (!tempo.toString().equals("00:00")) {
             registro.addTiempo(tempo.toString());
         }
@@ -56,7 +58,7 @@ public class PresentadorGuardar implements InterfaceGuardar.Presentador {
         String fecha = format0N(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) + "/" + format0N(mes)+ "/" + Calendar.getInstance().get(Calendar.YEAR);
         String hora = format0N(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) + ":" + format0N(Calendar.getInstance().get(Calendar.MINUTE))  + ":" + format0N(Calendar.getInstance().get(Calendar.SECOND));
         int m = Calendar.getInstance().get(Calendar.AM_PM);
-        registro.setNombre(hora +" | "+ fecha);
+        registro.setNombre(fecha +"  |  "+ hora);
     }
 
     private String format0N(int numero) {
