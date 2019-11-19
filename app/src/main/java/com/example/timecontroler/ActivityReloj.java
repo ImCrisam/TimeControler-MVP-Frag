@@ -31,7 +31,7 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         intent = new Intent();
-        guardar = new PresentadorGuardar(this);
+        guardar = new PresentadorGuardar(this, getApplicationContext());
         presenter = new PresentadorReloj(this);
 
         btn1 = findViewById(R.id.btnPlay);
@@ -40,6 +40,7 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
 
         btnResult = findViewById(R.id.btnResultados);
         btnRelojA = findViewById(R.id.btnTiempo);
+        btnRelojA.setEnabled(false);
 
         frameLy1 = findViewById(R.id.frameLy1);
         frameLy2 = findViewById(R.id.frameLy2);
@@ -164,9 +165,12 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
 
 
     private void acciones(int i) {
-        isbegin = false;
+        if (isbegin) {
+            guardar.new_star();
+        }
         switch (i) {
             case 1:
+                isbegin = false;
                 if (isplay) {
                     btn1.setImageDrawable(getDrawable(R.drawable.pause));
                 } else {
@@ -177,12 +181,13 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                 isplay = !isplay;
                 break;
             case 2:
-                guardar.obtener(intFragReset);
+                guardar.agregar(intFragReset);
                 presenter.replay();
                 break;
             case 3:
-                guardar.obtener(intFragReset);
-                guardar.obtener(intFragTotal);
+                guardar.agregar(intFragReset);
+                guardar.guardar(intFragTotal);
+
                 presenter.reset(1);
                 presenter.reset(2);
                 presenter.start_Stop(1);
@@ -190,6 +195,7 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                 presenter.stop();
                 btn1.setImageDrawable(getDrawable(R.drawable.play));
                 isplay = false;
+                isbegin = true;
                 break;
         }
     }

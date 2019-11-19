@@ -14,9 +14,13 @@ public interface InterfaceGuardar {
     interface Presentador {
         void leer();
 
-        void guardar();
+        void guardar(int i);
 
         void obtener(int i);
+
+        void agregar(int i);
+
+        void new_star();
     }
 
 }

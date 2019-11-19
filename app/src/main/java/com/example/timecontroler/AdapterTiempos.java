@@ -29,8 +29,10 @@ public class AdapterTiempos extends RecyclerView.Adapter<AdapterTiempos.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull AdapterTiempos.ViewHolder holder, int position) {
-        holder.number.setText(position+1+"");
-        holder.timer.setText(tiempos.get(position));
+
+            holder.number.setText(position+1+"");
+            holder.timer.setText(tiempos.get(position));
+
     }
 
     @Override

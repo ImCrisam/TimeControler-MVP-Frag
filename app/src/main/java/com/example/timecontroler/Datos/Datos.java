@@ -15,7 +15,7 @@ import java.util.List;
 public class Datos {
     private Context ctx;
 
-    private String separador = "---";
+    private static final String separador = "---";
     public static final String nombreArchivo = "RegistroTimeControl.txt";
 
     public Datos(Context ctx) {
@@ -40,13 +40,13 @@ public class Datos {
                     r.setTotal(linea);
                     linea = br.readLine();
                     index = false;
-                    while (!index || linea != null) {
-                        r.addTiempo(linea);
-
+                    while (!index && linea != null) {
                         if (linea.equals(separador)) {
                             listR.add(r);
                             r = new Registro();
                             index = true;
+                        } else {
+                            r.addTiempo(linea);
                         }
                         linea = br.readLine();
                     }
@@ -68,18 +68,71 @@ public class Datos {
                     nombreArchivo, ctx.MODE_PRIVATE));
             for (Registro regis : registros) {
                 archivo.write(regis.getNombre());
+                archivo.write("\n");
                 archivo.write(regis.getTotal());
+                archivo.write("\n");
+
                 for (int i = 0; i < regis.getSizeTiempos(); i++) {
                     archivo.write(regis.getItem(i));
+                    archivo.write("\n");
                 }
             }
             archivo.write(separador);
+            archivo.write("\n");
+
             archivo.flush();
             archivo.close();
         } catch (IOException e) {
         }
         Toast t = Toast.makeText(ctx, "Los datos fueron grabados", Toast.LENGTH_SHORT);
         t.show();
+    }
+
+
+    public void clear() {
+        try {
+            OutputStreamWriter archivo = new OutputStreamWriter(ctx.openFileOutput(
+                    nombreArchivo, ctx.MODE_PRIVATE));
+                archivo.write("");
+
+            archivo.flush();
+            archivo.close();
+        } catch (IOException e) {
+        }
+        Toast t = Toast.makeText(ctx, "clear", Toast.LENGTH_SHORT);
+        t.show();
+    }
+
+    public void agregar(Registro registros) {
+        String[] list = ctx.fileList();
+        if (existe(list, nombreArchivo)) {
+            try {
+                OutputStreamWriter archivo = new OutputStreamWriter(ctx.openFileOutput(
+                        nombreArchivo, ctx.MODE_APPEND));
+                archivo.append(registros.getNombre());
+                archivo.append("\n");
+
+                archivo.append(registros.getTotal());
+                archivo.append("\n");
+
+                for (int i = 0; i < registros.getSizeTiempos(); i++) {
+                    archivo.append(registros.getItem(i));
+                    archivo.append("\n");
+                }
+
+                archivo.append(separador);
+                archivo.append("\n");
+                archivo.flush();
+                archivo.close();
+            } catch (IOException e) {
+                Toast t = Toast.makeText(ctx, "Error", Toast.LENGTH_SHORT);
+            }
+            Toast t = Toast.makeText(ctx, "Los datos fueron grabados", Toast.LENGTH_SHORT);
+            t.show();
+        } else {
+            grabar((List<Registro>) registros);
+        }
+
     }
 
     private boolean existe(String[] archivos, String archbusca) {
