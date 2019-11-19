@@ -47,13 +47,14 @@ public class AdapterResultados extends  RecyclerView.Adapter<AdapterResultados.V
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nombre, total;
+        TextView nombre, total, cantidad;
         RecyclerView recy;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nombre = itemView.findViewById(R.id.nombre);
             total = itemView.findViewById(R.id.total);
+            cantidad = itemView.findViewById(R.id.cantidad);
             recy = itemView.findViewById(R.id.recycle);
         }
 
