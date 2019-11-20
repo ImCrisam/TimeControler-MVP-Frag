@@ -46,6 +46,7 @@ public class PresentadorGuardar implements InterfaceGuardar.Presentador {
 
     @Override
     public void agregar(int i) {
+        tempo = view.getFragmeny(i).getTime();
         if (!tempo.toString().equals("00:00")) {
             registro.addTiempo(tempo.toString());
         }

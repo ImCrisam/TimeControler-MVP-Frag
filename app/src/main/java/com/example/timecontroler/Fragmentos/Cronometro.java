@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Chronometer;
 
+import com.example.timecontroler.Chronometer2;
 import com.example.timecontroler.R;
 
 
 public class Cronometro extends Frag {
 
 
-    private Chronometer chronometer;
+    private Chronometer2 chronometer;
     private boolean iniciado;
     private boolean star;
     private long basepausa;

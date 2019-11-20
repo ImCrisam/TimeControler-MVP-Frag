@@ -8,7 +8,7 @@
 
 
 
-    <Chronometer
+    <com.example.timecontroler.Chronometer2
         android:id="@+id/chronometer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
