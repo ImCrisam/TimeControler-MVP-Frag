@@ -64,6 +64,16 @@ private TextClock txtClock;
         return null;
     }
 
+    @Override
+    public int getMilis() {
+        return 0;
+    }
+
+    @Override
+    public void setMilis(int milis) {
+
+    }
+
 
     @Override
     public void onViewCreated(android.view.View view, Bundle savedInstanceState) {

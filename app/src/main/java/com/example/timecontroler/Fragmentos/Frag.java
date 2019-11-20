@@ -34,14 +34,25 @@ public abstract class Frag extends Fragment implements FragmentNavigation.View {
     public abstract void diseño(int i);
 
     public abstract Boolean isStart();
+
     public abstract Boolean isIniciado();
+
     public abstract void setIniciado(boolean booolean);
+
     public abstract long getBase();
+
     public abstract void setBasepausa(long l);
+
     public abstract long getBasepausa();
+
     public abstract void setbase(long l);
+
     public abstract CharSequence getTime();
 
+    public abstract int getMilis();
+
+
+    public abstract void setMilis(int milis);
 
 
 }

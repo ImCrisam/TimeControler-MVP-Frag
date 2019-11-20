@@ -16,7 +16,7 @@ public interface InterfaceGuardar {
 
         void guardar(int i);
 
-        void obtener(int i);
+        void salvar();
 
         void agregar(int i);
 

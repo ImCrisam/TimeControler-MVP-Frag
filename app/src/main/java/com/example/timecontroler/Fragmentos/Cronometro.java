@@ -1,9 +1,11 @@
 package com.example.timecontroler.Fragmentos;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Chronometer;
 
+import com.example.timecontroler.Datos.Datos;
 import com.example.timecontroler.R;
 
 
@@ -16,6 +18,10 @@ public class Cronometro extends Frag {
     private long basepausa;
     private int textSize = 0;
     private int gravity = 0;
+    private int milis = 0;
+    private Thread thread;
+    private boolean setRun;
+
 
 
     @Override
@@ -26,6 +32,7 @@ public class Cronometro extends Frag {
     public Cronometro(int i) {
         star = false;
         setDiseño(i);
+        setRun = false;
     }
 
     private void setDiseño(int i) {
@@ -52,7 +59,7 @@ public class Cronometro extends Frag {
         refrescar();
         chronometer.stop();
         star = false;
-        iniciado=false;
+        iniciado = false;
 
     }
 
@@ -61,12 +68,17 @@ public class Cronometro extends Frag {
         this.star = is;
         if (!iniciado) {
             iniciado = true;
+
         }
         if (star) {
+
             chronometer.start();
+            setRun = true;
+            milisegundos();
 
         } else {
             chronometer.stop();
+            setRun = false;
         }
     }
 
@@ -100,7 +112,7 @@ public class Cronometro extends Frag {
 
     @Override
     public void setBasepausa(long l) {
-        basepausa=l;
+        basepausa = l;
     }
 
     @Override
@@ -116,6 +128,37 @@ public class Cronometro extends Frag {
     @Override
     public CharSequence getTime() {
         return chronometer.getText();
+    }
+    @Override
+    public int getMilis() {
+        return milis;
+    }
+    @Override
+    public void setMilis(int milis) {
+        this.milis = milis;
+    }
+
+    private void milisegundos() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    while (setRun) {
+                        milis += 1;
+                        if (milis == 10) {
+                            milis = 0;
+                        }
+                        Thread.sleep(100);
+//                        System.out.println(milis + "");
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
 }
