@@ -32,8 +32,7 @@ public class PresentadorGuardar implements InterfaceGuardar.Presentador {
     @Override
     public void guardar(int total) {
         tempo = view.getFragmeny(total).getTime();
-        mili = view.getFragmeny(total).getMilis();
-        registro.setTotal(tempo.toString() + "." + mili);
+        registro.setTotal(tempo.toString() );
     }
 
 
@@ -46,10 +45,9 @@ public class PresentadorGuardar implements InterfaceGuardar.Presentador {
     @Override
     public void agregar(int i) {
         tempo = view.getFragmeny(i).getTime();
-        mili = view.getFragmeny(i).getMilis();
 
-        if (!tempo.toString().equals("00:00" )|| mili!=0) {
-            registro.addTiempo(tempo.toString() + "." + mili);
+        if (!tempo.toString().equals("00:00" )) {
+            registro.addTiempo(tempo.toString());
         }
     }
 

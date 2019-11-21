@@ -2,11 +2,15 @@ package com.example.timecontroler.Fragmentos;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Chronometer;
 
 import com.example.timecontroler.Datos.Datos;
 import com.example.timecontroler.R;
+
+import java.time.Clock;
 
 
 public class Cronometro extends Frag {
@@ -33,6 +37,8 @@ public class Cronometro extends Frag {
         star = false;
         setDiseño(i);
         setRun = false;
+        basepausa= SystemClock.elapsedRealtime();
+
     }
 
     private void setDiseño(int i) {
@@ -74,7 +80,6 @@ public class Cronometro extends Frag {
 
             chronometer.start();
             setRun = true;
-            milisegundos();
 
         } else {
             chronometer.stop();
@@ -137,28 +142,29 @@ public class Cronometro extends Frag {
     public void setMilis(int milis) {
         this.milis = milis;
     }
-
-    private void milisegundos() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-                    while (setRun) {
-                        milis += 1;
-                        if (milis == 10) {
-                            milis = 0;
-                        }
-                        Thread.sleep(100);
-//                        System.out.println(milis + "");
-                    }
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-    }
+//
+//    private void milisegundos() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                try {
+//                    while (setRun) {
+//                        milis += 2;
+//                        if (milis ==10) {
+//                            milis = 0;
+//                        }
+//                        Thread.sleep(200);
+//
+//
+//                    }
+//
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//
+//    }
 
 }

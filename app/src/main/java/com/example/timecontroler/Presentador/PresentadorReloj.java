@@ -6,10 +6,12 @@ import com.example.timecontroler.Fragmentos.Frag;
 import com.example.timecontroler.Navi.ActivityReloj;
 import com.example.timecontroler.Navi.FragmentNavigation;
 
+import java.time.Clock;
+
 public class PresentadorReloj implements FragmentNavigation.Presenter, ActivityReloj.Presentador {
 
     private ActivityReloj.View view;
-    private Frag frag;
+    private Frag frag, frag1;
     private Frag fragArry[] = new Frag[2];
     private boolean is[] = new boolean[2];
     private long base[] = new long[2];
@@ -31,11 +33,13 @@ public class PresentadorReloj implements FragmentNavigation.Presenter, ActivityR
     @Override
     public void stop() {
         frag = (Frag) view.getFragmeny(1);
-        frag.start(false);
         frag.setBasepausa(SystemClock.elapsedRealtime());
+
+        frag.start(false);
         frag = (Frag) view.getFragmeny(2);
-        frag.start(false);
         frag.setBasepausa(SystemClock.elapsedRealtime());
+
+        frag.start(false);
     }
 
     @Override
@@ -44,15 +48,18 @@ public class PresentadorReloj implements FragmentNavigation.Presenter, ActivityR
         boolean isIniciando = frag.isIniciado();
         if (!isIniciando) {
             frag.setbase(SystemClock.elapsedRealtime());
+
             frag.start(true);
 
         } else {
             boolean start = frag.isStart();
             if (start) {
                 frag.setBasepausa(SystemClock.elapsedRealtime());
+
                 frag.start(!start);
             } else {
                 frag.setbase(tiempoRealPausa(frag.getBase(), frag.getBasepausa()));
+
                 frag.start(!start);
             }
         }
@@ -66,15 +73,26 @@ public class PresentadorReloj implements FragmentNavigation.Presenter, ActivityR
 
     @Override
     public void replay() {
-        int i, k;
+
         if (posicion) {
-            i=2;
-            k=1;
+            frag = (Frag) view.getFragmeny(2);
+            frag1 = (Frag) view.getFragmeny(1);
         }else {
-            i=1;
-            k=2;
+            frag = (Frag) view.getFragmeny(1);
+            frag1 = (Frag) view.getFragmeny(2);
         }
-        reset(i);
+
+        System.out.println(SystemClock.elapsedRealtime());
+        System.out.println(getMSecon(SystemClock.elapsedRealtime()));
+        System.out.println(SystemClock.elapsedRealtime()-getMSecon(frag.getBase()));
+        System.out.println(SystemClock.elapsedRealtime()-getMSecon(SystemClock.elapsedRealtime()));
+        System.out.println(SystemClock.elapsedRealtime()-getMSecon(SystemClock.elapsedRealtime()-getMSecon(frag.getBase())));
+        frag.setbase(SystemClock.elapsedRealtime()-getMSecon(SystemClock.elapsedRealtime()-getMSecon(frag.getBase())));
+
+
+
+
+     /*   reset(i);
         frag = (Frag) view.getFragmeny(k);
         if(frag.isStart()){
             start_Stop(i);
@@ -82,7 +100,13 @@ public class PresentadorReloj implements FragmentNavigation.Presenter, ActivityR
             frag = (Frag) view.getFragmeny(i);
             frag.setBasepausa(SystemClock.elapsedRealtime());
             frag.setbase(SystemClock.elapsedRealtime());
-        }
+        }*/
+    }
+
+    private long getMSecon(long base) {
+        String tempo="000"+(base) +"";
+        tempo= tempo.substring(tempo.length()-3);
+        return Long.parseLong(tempo);
     }
 
     private long tiempoRealPausa(long base, long basepausa) {

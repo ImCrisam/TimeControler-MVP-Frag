@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.timecontroler.Adapter.AdapterResultados;
 import com.example.timecontroler.Datos.Datos;
 import com.example.timecontroler.Modelos.Registro;
 

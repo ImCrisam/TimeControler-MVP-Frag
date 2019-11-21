@@ -176,22 +176,25 @@ public class ActivityReloj extends FragmentActivity implements com.example.timec
                 } else {
                     btn1.setImageDrawable(getDrawable(R.drawable.play));
                 }
-                presenter.start_Stop(2);
-                presenter.start_Stop(1);
+                presenter.start_Stop(intFragReset);
+                presenter.start_Stop(intFragTotal);
                 isplay = !isplay;
                 break;
             case 2:
                 guardar.agregar(intFragReset);
                 presenter.replay();
+
                 break;
             case 3:
                 guardar.agregar(intFragReset);
                 guardar.guardar(intFragTotal);
+                guardar.salvar();
 
-                presenter.reset(1);
-                presenter.reset(2);
-                presenter.start_Stop(1);
-                presenter.start_Stop(2);
+                presenter.reset(intFragReset);
+                presenter.start_Stop(intFragReset);
+
+                presenter.reset(intFragTotal);
+                presenter.start_Stop(intFragTotal);
                 presenter.stop();
                 btn1.setImageDrawable(getDrawable(R.drawable.play));
                 isplay = false;

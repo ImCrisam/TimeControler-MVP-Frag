@@ -130,7 +130,9 @@ public class Datos {
             Toast t = Toast.makeText(ctx, "Los datos fueron grabados", Toast.LENGTH_SHORT);
             t.show();
         } else {
-            grabar((List<Registro>) registros);
+            List<Registro> registros1= new ArrayList<>();
+            registros1.add(registros);
+            grabar(registros1);
         }
 
     }

@@ -1,10 +1,9 @@
-package com.example.timecontroler;
+package com.example.timecontroler.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.timecontroler.Modelos.Registro;
+import com.example.timecontroler.R;
 
 import java.util.List;
 
